@@ -1,10 +1,7 @@
 ﻿using EDriveRent.Models.Contracts;
 using EDriveRent.Utilities.Messages;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace EDriveRent
 {
@@ -117,6 +114,11 @@ namespace EDriveRent
         {
             double percentageUsed = Math.Round((mileage / MaxMileage) * 100, 0, MidpointRounding.ToEven);
             batteryLevel -= (int)percentageUsed;
+
+            if (BatteryLevel < 0)
+            {
+                batteryLevel = 0;
+            }
         }
     }
     public class CargoVan : Vehicle
@@ -129,7 +131,7 @@ namespace EDriveRent
         public override void Drive(double mileage)
         {
             double percentageUsed = Math.Round((mileage / MaxMileage) * 100, 0, MidpointRounding.ToEven);
-            batteryLevel -= (int)percentageUsed;
+            batteryLevel -= (int)percentageUsed+5;
 
             if (BatteryLevel < 0)
             {
